@@ -47,7 +47,7 @@ setMethod("readWorksheet",
              useCachedValues = FALSE, keep = NULL, drop = NULL, simplify = FALSE,
              readStrategy = "default") {
 			 
-			if(!is.null(region)) {
+			if(is.null(region)) {
 				# Convert region to indices
 				idx = rg2idx(region)
 				startRow = idx[,1]

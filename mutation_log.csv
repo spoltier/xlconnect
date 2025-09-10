@@ -1,0 +1,2 @@
+Mutant_ID,File_Path,Line_Number,Mutation_Operator,Original_Code,Mutated_Code,Test_Outcome,Analysis_Notes,Action_Taken,Final_Status
+1,"R/workbook.readWorksheet.R",49,"ROR","if(!is.null(region)) {","if(is.null(region)) {","SURVIVED","The mutant survived the testthat suite, but was killed by the RUnit suite. This indicates a gap in the testthat suite's coverage for cases where the 'region' parameter is used. The RUnit test 'test.writeNamedRegionToFile' likely reads the data back after writing, which caught the mutation.","Identified a weakness in the testthat suite.","SURVIVED"
