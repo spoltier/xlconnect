@@ -1,0 +1,2 @@
+Mutant_ID,File_Path,Line_Number,Mutation_Operator,Original_Code,Mutated_Code,Test_Outcome,Analysis_Notes,Action_Taken,Final_Status
+M001,R/dataframeFromJava.R,48,ReturnValue,as.vector(.jcall(df, "[D", "getNumericColumn", jIndex)),as.vector(.jcall(df, "[S", "getStringColumn", jIndex)),SURVIVED,"The testthat suite did not have assertions to check for the column type after reading from the excel file. The RUnit test suite did have a check that failed as a result of the mutation.",,""

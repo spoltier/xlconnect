@@ -45,7 +45,7 @@ dataframeFromJava <- function(df, check.names) {
   		v = switch(columnTypes[i],
   				
   				"Numeric" = {
-  					as.vector(.jcall(df, "[D", "getNumericColumn", jIndex))
+					as.vector(.jcall(df, "[S", "getStringColumn", jIndex))
   				},
   				
   				"String" = {
