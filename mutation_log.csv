@@ -1,0 +1,5 @@
+Mutant_ID,File_Path,Line_Number,Mutation_Operator,Original_Code,Mutated_Code,Test_Outcome,Analysis_Notes,Action_Taken,Final_Status
+M001,R/writeNamedRegionToFile.R,50,STD,"saveWorkbook(wb)","# saveWorkbook(wb)",KILLED,"Both test suites failed as expected.","",
+M002,R/writeNamedRegionToFile.R,37,LOR,"create = !file.exists(file)","create = file.exists(file)",KILLED,"Both test suites failed as expected.","",
+M003,R/dataframeToJava.R,55,AOR,".jcall(dFrame, ""V"", ""addDateTimeColumn"", cnames[i], .jarray(.jlong(as.numeric(v) * 1000)), .jarray(is.na(v)))",".jcall(dFrame, ""V"", ""addDateTimeColumn"", cnames[i], .jarray(.jlong(as.numeric(v) / 1000)), .jarray(is.na(v)))",KILLED,"Both test suites failed as expected.","",
+M004,R/workbook.readNamedRegion.R,92,RVM,"if(length(dataFrame) == 1) dataFrame[[1]]","if(length(dataFrame) == 1) NULL",KILLED,"Both test suites failed as expected.","",
