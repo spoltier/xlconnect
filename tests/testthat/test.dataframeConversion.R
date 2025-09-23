@@ -34,6 +34,15 @@ test_that("dataframe conversion - Tests whether data.frame's pushed and pulled t
       ),
       length = 10
     ),
+    Column.K = rep(
+      c(
+        as.POSIXct("2021-10-31 03:00:00.123", format = "%Y-%m-%d %H:%M:%OS"),
+        as.POSIXct("2021-10-31 03:00:00.1234", format = "%Y-%m-%d %H:%M:%OS"),
+        as.POSIXct("2021-10-31 03:00:00.999", format = "%Y-%m-%d %H:%M:%OS"),
+        as.POSIXct("2021-10-31 03:00:00.9999", format = "%Y-%m-%d %H:%M:%OS")
+      ),
+      length = 10
+    ),
     stringsAsFactors = F
   )
   cdf[["Column.F"]] <- factor(cdf[["Column.F"]])
