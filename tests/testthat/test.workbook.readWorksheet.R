@@ -1671,3 +1671,48 @@ test_that("reading sparse bitset worksheet works", {
   expect_silent(sparseSheet <- readWorksheet(wbSparse.xlsx, "hist"))
   expect_true(is.data.frame(sparseSheet))
 })
+
+test_that("drop argument correctly removes specified columns", {
+  # Create a workbook with some data
+  wb <- loadWorkbook(filename = tempfile(fileext = ".xlsx"), create = TRUE)
+  createSheet(wb, name = "test_drop")
+
+  df_orig <- data.frame(ColA = 1:5, ColB = letters[1:5], ColC = 11:15, ColD = LETTERS[1:5], stringsAsFactors = FALSE)
+
+  writeWorksheet(wb, df_orig, sheet = "test_drop", header = TRUE)
+
+  # Drop columns by name
+  df_dropped_B <- readWorksheet(wb, "test_drop", drop = "ColB")
+  expect_false("ColB" %in% colnames(df_dropped_B))
+  expect_true(all(c("ColA", "ColC", "ColD") %in% colnames(df_dropped_B)))
+  expect_equal(ncol(df_dropped_B), 3)
+  # Check that the remaining columns have the correct data
+  expect_equal(df_dropped_B$ColA, df_orig$ColA)
+  expect_equal(df_dropped_B$ColC, df_orig$ColC)
+  expect_equal(df_dropped_B$ColD, df_orig$ColD)
+
+  # Drop columns by index
+  df_dropped_2 <- readWorksheet(wb, "test_drop", drop = 2)
+  expect_false("ColB" %in% colnames(df_dropped_2))
+  expect_true(all(c("ColA", "ColC", "ColD") %in% colnames(df_dropped_2)))
+  expect_equal(ncol(df_dropped_2), 3)
+  expect_equal(df_dropped_2$ColA, df_orig$ColA)
+  expect_equal(df_dropped_2$ColC, df_orig$ColC)
+  expect_equal(df_dropped_2$ColD, df_orig$ColD)
+
+  # Drop multiple columns
+  df_dropped_multi <- readWorksheet(wb, "test_drop", drop = c("ColA", "ColD"))
+  expect_false(any(c("ColA", "ColD") %in% colnames(df_dropped_multi)))
+  expect_true(all(c("ColB", "ColC") %in% colnames(df_dropped_multi)))
+  expect_equal(ncol(df_dropped_multi), 2)
+  expect_equal(df_dropped_multi$ColB, df_orig$ColB)
+  expect_equal(df_dropped_multi$ColC, df_orig$ColC)
+
+  # Drop multiple columns by index
+  df_dropped_multi_idx <- readWorksheet(wb, "test_drop", drop = c(1, 4))
+  expect_false(any(c("ColA", "ColD") %in% colnames(df_dropped_multi_idx)))
+  expect_true(all(c("ColB", "ColC") %in% colnames(df_dropped_multi_idx)))
+  expect_equal(ncol(df_dropped_multi_idx), 2)
+  expect_equal(df_dropped_multi_idx$ColB, df_orig$ColB)
+  expect_equal(df_dropped_multi_idx$ColC, df_orig$ColC)
+})
