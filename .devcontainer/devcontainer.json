@@ -29,5 +29,5 @@
 	// ,"runArgs": [
 	// 	"--log-driver=none"
 	// ]
-	"postAttachCommand": "R -e 'devtools::install()'"
+	"postAttachCommand": "installGithub.r r-lib/revdepcheck;R -e 'devtools::install()'"
 }

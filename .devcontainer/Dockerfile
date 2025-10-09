@@ -8,7 +8,7 @@ RUN apt-get install -y openjdk-21-jdk-headless
 RUN R CMD javareconf
 # RUN tlmgr install xcolor  # (more latex libs would be required to include pdf related checks)
 RUN install2.r --error devtools rJava testthat zoo qpdf
-RUN installGithub.r r-lib/revdepcheck
+# RUN installGithub.r r-lib/revdepcheck # runs into github rate limits; moved to post-attach
 RUN apt-get install -y pandoc
 RUN install2.r --error ggplot2 tinytex
 RUN Rscript -e "{\
